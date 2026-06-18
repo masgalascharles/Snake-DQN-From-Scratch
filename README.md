@@ -55,7 +55,7 @@ RESULTS:
 <img width="2539" height="1407" alt="apples_eaten_per_episode_over_time" src="https://github.com/user-attachments/assets/d1f02e9a-5a55-4d58-95e7-522a75a78527" />
 https://github.com/user-attachments/assets/badadc8a-e37a-45f5-a502-cac1be74d1be
 
-The agent seemed to have learned that all moves are bad, which I suspect is because of the constant negative reward with no immediate positive, except when it might've randomly stumbled upon an apple during training. I'm unsure as to why during the end of training the agent survived for so long, but during testing it was killing itself quickly. I also think my state representation is a limiting factor. Even with my "new row" vector, spatial information is lost as the state matrix is flattened.
+The agent seemed to have learned that all moves are bad, which I suspect is because of the constant negative reward with no immediate positive, except when it might've randomly stumbled upon an apple during training. I'm unsure as to why during the end of training the agent was able to consistently survive for so long, but during testing it was killing itself quickly. I also think my state representation is a limiting factor. Even with my new row vector, it is likely hard for my agent to learn spatial relationships. My plan is to feed the network a state representation with more given information (like distance to apple) and modify my reward system to include positives for moving towards the apple.
 
 ## Attempt #1
 Network:
