@@ -9,15 +9,15 @@ Includes:
 - Epsilon-greedy exploration
 
 ## Attempt #3
-Network:
-(892, 512) → (512, 256) → (256, 64) → (64, 4)
+**Network:**\
+(892, 512) → (512, 256) → (256, 64) → (64, 4)\
 Leaky ReLU activation
 
-Significant changes:
+**Significant changes:**
 - State representation
 - Reward system
 
-State representation:
+**State representation:**
 - When the game is reset, the snake now starts with a random length between 2 and 40, instead of 2 and 221. This change was made to give the agent exposure to more early game states. It still starts in a random position too.
 - Flattened vector of the game display with shape (1, 892). The new state size comes from `environment.size ** 2 * 2 + 10`.
 - The new states look like this:
@@ -43,18 +43,18 @@ State representation:
   ```
   My idea was that this formatting of the game state would make it easier for the agent to extract the information it needs to make decisions. The previous one-hot encoded game state required the network to learn geometric relationships from a huge input space from scratch. Now, it is given these relationships, like the distance to the apple and the distances to the walls.
 
-A reward is now given for moving towards the apple:
+**Rewards:**
 - -1 for death
 - +0.8 for apple
 - -0.005 if agent moves away from the apple, but +0.004 if the agent moves towards the apple
 
-Training:
+**Training:**\
 I lowered the total number of episodes, because based on the graphs of the previous attempt, it doesn't need 250,000.
 - 200,000 total episodes
 - 100,000 "exploration" episodes (higher epsilon)
 - 100,000 "fine-tuning" episodes (constant epsilon of 0.05)
 
-Hyperparameters:
+**Hyperparameters:**
 - 0.001 learning rate
 - 0.99 gamma
 - 10,000 memory length
@@ -63,24 +63,24 @@ Hyperparameters:
 - 0.05 minimum epsilon
 - 100 maximum moves per episode
 
-RESULTS:
+**RESULTS:**
 COMING SOON
 
 ## Attempt #2
 I discovered I could use CuPy to speed up the training process. CuPy is a very simple transition from NumPy, except it allows operations on the GPU for significantly faster results.
 
-Significant changes:
+**Significant changes:**
 - Target network
 - Experience replay
 - State representation
 - GPU acceleration
 - Normalized rewards
 
-Network:
-(1848, 512) → (512, 256) → (256, 64) → (64, 4)
+**Network:**\
+(1848, 512) → (512, 256) → (256, 64) → (64, 4)\
 Leaky ReLU activation
 
-State representation:
+**State representation:**
 - When the game is reset, the snake now starts with a random length from 2 to 221 (I got 221 from `environment.size ** 2 / 2`, so the snake could start at a length from 2 to half of the environment's area). It also starts in a random position, not just the center. This is intended to give the agent a wide variety of states to explore, preventing it from overfitting to the usual starting state.
 - Vector of the game display with shape (1, 1848). The new state size comes from `(environment.size ** 2 + environment.size) * state_vector_size`.
 - One hot encoded vectors now represent each of the things in the game:
@@ -92,18 +92,19 @@ State representation:
   apple_vector = np.array([0, 0, 0, 1])
   ```
 
-Rewards are now between -1 and 1 as an attempt to prevent training instability:
+**Rewards:**\
+Now between -1 and 1 as an attempt to prevent training instability.
 - +0.8 for apple
 - -1 for death
 - -0.001 for each step
 
-Training:
+**Training:**\
 I had the idea to let the agent explore random states at first, and then choose its moves to gain experience in later stages of the game.
 - 250,000 total episodes
 - 150,000 "exploration" episodes (higher epsilon)
 - 100,000 "fine-tuning" episodes (constant epsilon of 0.05)
 
-Hyperparameters:
+**Hyperparameters:**
 - 0.001 learning rate
 - 0.99 gamma
 - 10,000 memory length
@@ -112,7 +113,7 @@ Hyperparameters:
 - 0.05 minimum epsilon
 - 150 maximum moves per episode
 
-RESULTS:
+**RESULTS:**
 <img width="2565" height="1407" alt="loss_over_time" src="https://github.com/user-attachments/assets/ba2faf05-2e9b-48ce-86dd-bc14a047cec4" />
 <img width="2552" height="1407" alt="moves_survived_per_episode_over_time" src="https://github.com/user-attachments/assets/ad912861-99f1-439c-819d-d588fb2553cf" />
 <img width="2539" height="1407" alt="apples_eaten_per_episode_over_time" src="https://github.com/user-attachments/assets/d1f02e9a-5a55-4d58-95e7-522a75a78527" />
