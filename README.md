@@ -18,7 +18,7 @@ Leaky ReLU activation
 - Reward system
 
 **State representation:**
-- When the game is reset, the snake now starts with a random length between 2 and 40, instead of 2 and 221. This change was made to give the agent exposure to more early game states. It still starts in a random position too.
+- When the game is reset, the snake now starts with a random length between 2 and 40, instead of 2 and 221. This change was made to give the agent exposure to more early game states. It still starts in a random position.
 - Flattened vector of the game display with shape (1, 892). The new state size comes from `environment.size ** 2 * 2 + 10`.
 - The new states look like this:
   ```python
