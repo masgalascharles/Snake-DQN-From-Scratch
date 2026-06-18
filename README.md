@@ -9,7 +9,7 @@ Includes:
 - Epsilon-greedy exploration
 
 ## Attempt #2
-I discovered I could use my GPU for training very easily using CuPy.
+I discovered I could use CuPy to speed up the training process. CuPy is a very simple transition from NumPy, except it allows operations on the GPU for significantly faster results.
 
 Network:
 
@@ -17,9 +17,9 @@ Network:
 Leaky ReLU activation
 
 State representation:
-- When the game is reset, the snake now starts with a random length from 2 to 221 (I got 221 from `environment.size ** 2 / 2`, so the snake could start at a length from 2 to half of the environment's area). It also starts in a random position, not just the center. This ensures the agent is exposed to a very wide variety of states, preventing it from overfitting to the usual starting state.
+- When the game is reset, the snake now starts with a random length from 2 to 221 (I got 221 from `environment.size ** 2 / 2`, so the snake could start at a length from 2 to half of the environment's area). It also starts in a random position, not just the center. This is intended to give the agent a wide variety of states to explore, preventing it from overfitting to the usual starting state.
 - Flattened vector of the game display with shape (1, 1848)
-- The new state size comes from `environment.size ** 2 + environment.size * state_vector_size`
+- The new state size comes from `(environment.size ** 2 + environment.size) * state_vector_size`
 - One hot encoded vectors now represent each of the things in the game:
   ```python
   empty_vector = np.array([0, 0, 0, 0])
@@ -29,7 +29,7 @@ State representation:
   apple_vector = np.array([0, 0, 0, 1])
   ```
 
-Rewards are now between -1 and 1 to prevent infinite loss:
+Rewards are now between -1 and 1 as an attempt to prevent training instability:
 - +0.8 for apple
 - -1 for death
 - -0.001 for each step
@@ -78,4 +78,4 @@ Training:
 - 0.95 gamma
 - 0.1 minimum epsilon
 
-For the first attempt, I wanted to see what would happen without a target network or experience replay. This resulted in the network being severely unstable, with the loss exploding to infinity. I also realized this could be because of my rewards and state representation. But even after I fixed the exploding loss by experimenting with the rewards a bit, the loss appeared to never drop and it remained high throughout training.
+For the first attempt, I wanted to see what would happen without a target network or experience replay. This resulted in the network being severely unstable, with the loss exploding to infinity. I also suspected this could be because of my rewards and state representation, in addition to having no target network or experience replay. But even after I fixed the exploding loss by experimenting with the rewards a bit, the loss appeared to never drop and it remained high throughout training. This proved the reward system wasn't the only issue.
