@@ -12,11 +12,12 @@ Includes:
 I discovered I could use my GPU for training very easily using CuPy.
 
 Network:
+
 (1848, 512) → (512, 256) → (256, 64) → (64, 4)
 Leaky ReLU activation
 
 State representation:
-- When the game is reset, the snake now starts with a random length from 2 to 221. It also starts in a random position, not just the center. This ensures the agent is exposed to a very wide variety of states, preventing it from overfitting to the usual starting state.
+- When the game is reset, the snake now starts with a random length from 2 to 221 (I got 221 from `environment.size ** 2 / 2`, so the snake could start at a length from 2 to half of the environment's area). It also starts in a random position, not just the center. This ensures the agent is exposed to a very wide variety of states, preventing it from overfitting to the usual starting state.
 - Flattened vector of the game display with shape (1, 1848)
 - The new state size comes from `environment.size ** 2 + environment.size * state_vector_size`
 - One hot encoded vectors now represent each of the things in the game:
@@ -46,6 +47,15 @@ Hyperparameters:
 - 512 batch size
 - 1,000 target network update interval
 - 0.05 minimum epsilon
+- 150 maximum moves per episode
+
+RESULTS:
+<img width="2565" height="1407" alt="loss_over_time" src="https://github.com/user-attachments/assets/ba2faf05-2e9b-48ce-86dd-bc14a047cec4" />
+<img width="2552" height="1407" alt="moves_survived_per_episode_over_time" src="https://github.com/user-attachments/assets/ad912861-99f1-439c-819d-d588fb2553cf" />
+<img width="2539" height="1407" alt="apples_eaten_per_episode_over_time" src="https://github.com/user-attachments/assets/d1f02e9a-5a55-4d58-95e7-522a75a78527" />
+https://github.com/user-attachments/assets/badadc8a-e37a-45f5-a502-cac1be74d1be
+
+The agent seemed to have learned that all moves are bad, which I suspect is because of the constant negative reward with no immediate positive, except when it might've randomly stumbled upon an apple during training. I'm unsure as to why during the end of training the agent survived for so long, but during testing it was killing itself quickly. I also think my state representation is a limiting factor. Even with my "new row" vector, spatial information is lost as the state matrix is flattened.
 
 ## Attempt #1
 Network:
