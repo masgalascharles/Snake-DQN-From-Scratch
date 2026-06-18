@@ -64,7 +64,12 @@ I lowered the total number of episodes, because based on the graphs of the previ
 - 100 maximum moves per episode
 
 **RESULTS:**
-COMING SOON
+<img width="2539" height="1407" alt="loss_over_time_episode_200000" src="https://github.com/user-attachments/assets/728bf8c6-3885-4632-91bf-83a94b4377ca" />
+<img width="2552" height="1407" alt="moves_survived_per_episode_over_time_episode_200000" src="https://github.com/user-attachments/assets/e58003c8-9e2f-4bad-9dc6-20e44af48ad0" />
+<img width="2499" height="1407" alt="apples_eaten_per_episode_over_time_episode_200000" src="https://github.com/user-attachments/assets/0eb198a8-9336-48e3-9cce-7feced7bdd5f" />
+https://github.com/user-attachments/assets/52707c94-4108-4a8f-b885-5705b23490be
+
+The agent sometimes eats a few apples and then goes in an infinite loop. I think this is caused by my new reward system of giving a reward for getting closer to the apple. It seems like it learned that going in circles and getting that small reward is better than risking going after the apples and dying.
 
 ## Attempt #2
 I discovered I could use CuPy to speed up the training process. CuPy is a very simple transition from NumPy, except it allows operations on the GPU for significantly faster results.
