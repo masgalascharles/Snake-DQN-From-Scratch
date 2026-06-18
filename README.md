@@ -1,5 +1,5 @@
 # Snake-DQN-From-Scratch
-This is a Deep Q Network built from scratch and trained to play Snake, using only NumPy and CuPy.
+This is a Deep Q Network built from scratch and trained to play Snake, using only NumPy and CuPy. The goal of this project was to learn how DQNs work at the lowest level by implementing everything manually rather than relying on deep learning frameworks.
 
 Includes:
 - Custom neural network
