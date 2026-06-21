@@ -31,7 +31,6 @@ Leaky ReLU activation
     the distance between the snake head and the left wall,
     the distance between the snake head and the right wall,
     
-    
     what is up,       # These 4 values can
     what is down,     # be an integer from -1 to 1,
     what is left,     # where -1 = danger, 0 = empty,
