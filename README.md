@@ -40,7 +40,7 @@ Leaky ReLU activation
     unused indices are filled with padding, which is -2
   ]
   ```
-  My idea was that this formatting of the game state would make it easier for the agent to extract the information it needs to make decisions. The previous one-hot encoded game state required the network to learn geometric relationships from a huge input space from scratch. Now, it is given these relationships, like the distance to the apple and the distances to the walls.
+  The goal of this state representation was to make it easier for the agent to get the information it needs to make decisions. The previous one-hot encoded game state required the network to learn geometric relationships from a very large, flattened grid. Now, it is given these relationships, like the distance to the apple and the distances to the walls.
 
 **Rewards:**
 - -1 for death
