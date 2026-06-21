@@ -68,7 +68,7 @@ I lowered the total number of episodes, because based on the graphs of the previ
 <img width="2499" height="1407" alt="apples_eaten_per_episode_over_time_episode_200000" src="https://github.com/user-attachments/assets/0eb198a8-9336-48e3-9cce-7feced7bdd5f" />
 https://github.com/user-attachments/assets/52707c94-4108-4a8f-b885-5705b23490be
 
-While the graphs looked promising, during evaluation the agent might eat a few apples and then goes in an infinite loop. I think this is caused by my new reward system of giving a reward for getting closer to the apple. It seems like it learned that going in circles and getting that small reward is better than risking going after the apples and dying. One improvement though, is that unlike the last attempt, this agent doesn't try to kill itself and actually learned to stay alive very well.
+While the graphs made it look like this run had potential, during evaluation, the agent might eat a few apples but then it goes in an infinite loop. I think this is caused by my new reward system of giving a reward for getting closer to the apple. It seems like it learned that going in circles and getting that small reward is better than risking going after the apples and dying. One improvement though, is that unlike the last attempt, this agent doesn't try to kill itself and actually learned to stay alive very well.
 
 ## Attempt #2
 I discovered I could use CuPy to speed up the training process. CuPy is a very simple transition from NumPy, except it allows operations on the GPU for significantly faster results.
