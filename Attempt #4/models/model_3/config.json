@@ -1,0 +1,16 @@
+{
+    "model_name": "model_3",
+    "steps": 600000,
+    "epsilon_start": "Unknown",
+    "min_epsilon": 0.05,
+    "epsilon_decay_rate": "Unknown",
+    "target_network_update_interval": 10000,
+    "learning_rate": 0.001,
+    "gamma": 0.99,
+    "memory_length": 150000,
+    "batch_size": 128,
+    "timeout": null,
+    "state_includes_snake_length": false,
+    "starting_lengths_used": "Unknown, but only included bigger snakes.",
+    "other_notes": "Fine-tuning of model 2 on longer snakes only to see if that would improve late game performance."
+}
