@@ -30,7 +30,7 @@ This attempt includes many small changes between similar models. Here is a brief
 - **Model 4** | Added snake length to the beginning of the state representation. My idea was that this would give the agent the ability to adjust its playstyle as the game progresses. I also started preventing the snake tail from starting outside of the game area by using a modified Hamiltonian path, which makes sure the state is always correctly representing the game. I generate a zig-zag like path through the game area, but exclude the first column to make sure the snake has area to escape and can't get trapped from the start. Trained for 600,000 steps.
 - **Model 41** | Changed the way starting lengths are randomly selected. Now, there is a 1/3 chance to get an early game snake, middle game snake, or late game snake. I started training with model 4, and trained for another 1,000,000 steps. This was to give more exposure to all stages of the game.
 - **Model 5** | Continued training of model 41, but I added a stalling penalty of -1 if the agent doesn't eat an apple for `environment.size ** 2 // 2.75` steps. All previous models had somewhat of a looping tendency. Trained for 1,000,000 steps. Model 5 was by far the best, as you can see in the evaluation below.
-- **Model 6** | Continued training of model 5 to see what would happen if I kept training it. This resulted in slightly worse performance.
+- **Model 6** | Continued training of model 5 to see what would happen if I kept training it. This resulted in slightly worse performance, which I suspect is due to overfitting.
 
 **Evaluation:**\
 Each model is given 500 episodes of play time, with a death penalty enforced if the agent goes `environment.size ** 2 // 2.75` steps without eating an apple.
