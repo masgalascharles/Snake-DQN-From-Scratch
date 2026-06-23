@@ -25,11 +25,122 @@ This attempt includes many small changes between similar models. Here is a brief
     ...objects gotten and added to the state 8 times, gotten by a ray cast in each direction from the snake's head. Object types are -1 for any danger (wall, snake body) and 1 for an apple.
   }
   ```
-- **Model 2** | Exact same setup as model 1, but trained for 1,000,000 steps instead of 500,000. Also increased memory length from 100,000 to 300,000. This produced significantly better results. Lacked late game skills.
+- **Model 2** | Exact same setup as model 1, but trained for 1,000,000 steps instead of 500,000. Also increased memory length from 100,000 to 300,000. This produced significantly better results, but it lacked late game skills.
 - **Model 3** | Continued training of model 2, but only bigger snakes were used as the starting length. This was an attempt to improve late game performance. Trained for 600,000 steps.
-- **Model 4** | Added snake length to the beginning of the state representation. I also started preventing the snake tail from starting outside of the game area by using a modified Hamiltonian path. I generate a zig-zag like path through the game area, but exclude the first column to make sure the snake has area to escape and can't get trapped from the start. Trained for 600,000 steps.
-- **Model 41** | Changed the way starting lengths are randomly selected. Now, there is a 1/3 chance to get an early game snake, middle game snake, or late game snake. I started training with model 4, and trained for another 1,000,000 steps.
-- **Model 5** | Continued training of model 41, but I added a stalling penalty of -1 if the agent doesn't eat an apple for `environment.size ** 2 // 2.75` steps. Trained for 1,000,000 steps.
+- **Model 4** | Added snake length to the beginning of the state representation. My idea was that this would give the agent the ability to adjust its playstyle as the game progresses. I also started preventing the snake tail from starting outside of the game area by using a modified Hamiltonian path, which makes sure the state is always correctly representing the game. I generate a zig-zag like path through the game area, but exclude the first column to make sure the snake has area to escape and can't get trapped from the start. Trained for 600,000 steps.
+- **Model 41** | Changed the way starting lengths are randomly selected. Now, there is a 1/3 chance to get an early game snake, middle game snake, or late game snake. I started training with model 4, and trained for another 1,000,000 steps. This was to give more exposure to all stages of the game.
+- **Model 5** | Continued training of model 41, but I added a stalling penalty of -1 if the agent doesn't eat an apple for `environment.size ** 2 // 2.75` steps. All previous models had somewhat of a looping tendency. Trained for 1,000,000 steps. Model 5 was by far the best, as you can see in the evaluation below.
+- **Model 6** | Continued training of model 5 to see what would happen if I kept training it. This resulted in slightly worse performance.
+
+**Evaluation:**\
+Each model is given 500 episodes of play time, with a death penalty enforced if the agent goes `environment.size ** 2 // 2.75` steps without eating an apple.
+
+<ins>Task #1: starting state is always the default</ins>
+
+model_1/model_1 | Score: 14448, Total moves: 378759\
+model_2/model_2 | Score: 23244, Total moves: 472553\
+model_3/model_3 | Score: 25382, Total moves: 559883\
+model_4/model_4 | Score: 4679, Total moves: 181163\
+model_4/model_41 | Score: 22979, Total moves: 472478\
+**model_5/model_5 | Score: 30136, Total moves: 585137 <--- WINNER!!!**
+
+<ins>Task #2: starting state is picked randomly</ins>
+
+model_1/model_1 | Score: 5750, Total moves: 177364\
+model_2/model_2 | Score: 7260, Total moves: 185876\
+model_3/model_3 | Score: 8391, Total moves: 224164\
+model_4/model_4 | Score: 5257, Total moves: 182906\
+model_4/model_41 | Score: 8989, Total moves: 222336\
+**model_5/model_5 | Score: 9951, Total moves: 229215 <--- WINNER!!!**
+
+**Evaluation (model 5 vs model 6 only):**\
+Each model is given 500 episodes of play time, with a death penalty enforced if the agent goes `environment.size ** 2 // 2.75` steps without eating an apple.
+
+<ins>Task #1: starting state is always the default</ins>
+
+**saved_runs/model_5/model_5 | Score: 30088, Total moves: 585650 <--- WINNER!!!**\
+model_6 | Score: 28979, Total moves: 546447\
+model_6_step_4000000 | Score: 28903, Total moves: 547920\
+model_6_step_3000000 | Score: 28862, Total moves: 551829\
+model_6_step_2000000 | Score: 28206, Total moves: 549548\
+model_6_step_1000000 | Score: 27671, Total moves: 540099
+
+<ins>Task #2: starting state is picked randomly</ins>
+
+**saved_runs/model_5/model_5 | Score: 9624, Total moves: 224234 <--- WINNER!!!**\
+model_6 | Score: 9009, Total moves: 212459\
+model_6_step_4000000 | Score: 8763, Total moves: 201101\
+model_6_step_3000000 | Score: 9222, Total moves: 211368\
+model_6_step_2000000 | Score: 9601, Total moves: 222840 **<--- CLOSE SECOND!!!**\
+model_6_step_1000000 | Score: 8782, Total moves: 205207
+
+### A Closer Look At Model 5
+**Network:**\
+(1 snake length + 2 apple distance + 4 walls distance + 8 * 3 ray casts = 31, 512) → (512, 256) → (256, 64) → (64, 4)\
+Leaky ReLU activation
+
+**Significant changes:**
+- State representation
+- Reward system
+- Starting lengths: now there's a 1/3 chance of a random length from 2 to 39, from 41 to 99, or from 101 to 199.
+- Starting position: the snake now starts along a Hamiltonian path, excluding the first column of the game grid, to keep the snake inside the field of play throughout all of the training examples. The first column of the grid was excluded to prevent situations where the snake began the game very long and didn't have a way to survive.
+
+**State representation:**
+- The new states look like this:
+  ```python
+  state = [
+    # Distinguish between early game and late game
+    snake_length,
+
+    # x and y coordinates are used for distances instead of using plain distances so the agent can actually tell what moves it needs to make in what directions and how much of each vs only knowing the unsigned distance
+
+    # Give the directions to the apple
+    x_distance_to_apple,
+    y_distance_to_apple,
+
+    # Make sure it always knows where the walls are
+    y_distance_to_upper_wall,
+    y_distance_to_lower_wall,
+    x_distance_to_left_wall,
+    x_distance_to_right_wall,
+
+    # Intended for it to learn how crowded areas are, whether there's a straight path to the apple, etc.
+    nearest_object_type,
+    x_distance_to_nearest_object,
+    y_distance_to_nearest_object,
+    # ...
+    # continued for objects in all 8 directions from the snake's head
+  ]
+  ```
+  I think the best part of this state is that the agent doesn't need to learn any basic geometric relationships from scatch. The most important relationships are given to it in this vector. Plus, this state is very compact, giving much faster runtimes.
+
+**Rewards:**
+- -1 for death
+- -1 for going `environment.size ** 2 // 2.75` steps without eating an apple. This was meant to prevent looping.
+- +0.9 for apples. This was increased to try to give the agent more of a reason to get apples.
+- -0.001 for each step to force the agent to want apples
+
+**Training time:**\
+- Trained after initializing the agent with model 41's weights and biases
+- 100,000 exploration episodes with epsilon starting at 0.2
+- 900,000 fine-tuning episodes with epsilon at 0
+
+**Hyperparameters:**
+- 0.001 learning rate
+- 0.99 gamma
+- 200,000 memory length
+- 128 batch size
+- 10,000 target network update interval
+- 0.2 initial epsilon
+- 0 minimum epsilon
+
+**RESULTS:**
+<img width="2565" height="1407" alt="model_5_loss_over_time_step_done" src="https://github.com/user-attachments/assets/14b365ee-aa52-4c57-9def-b91efd2b633a" />
+<img width="2578" height="1407" alt="model_5_moves_survived_per_episode_over_time_step_done" src="https://github.com/user-attachments/assets/128cb4b3-c924-4c01-8f8d-2d4f7977efe7" />
+<img width="2552" height="1407" alt="model_5_apples_eaten_per_episode_over_time_step_done" src="https://github.com/user-attachments/assets/a4e787a4-0819-4ae3-91a8-0be8ab36e770" />
+https://github.com/user-attachments/assets/f67da238-8783-405f-8c71-192273450e7c
+
+
 
 ## Attempt #3
 **Network:**\
