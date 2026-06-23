@@ -79,7 +79,7 @@ pip install -r requirements.txt
 
 ### 4. Navigate to the Directory
 ```bash
-cd "Attempt #4"
+cd "attempt_4"
 ```
 
 ### 5. Run the Best Agent
