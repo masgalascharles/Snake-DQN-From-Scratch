@@ -52,7 +52,7 @@ model_6_step_3000000 | Score: 9222, Total moves: 211368\
 model_6_step_2000000 | Score: 9601, Total moves: 222840 **<--- CLOSE SECOND!!!**\
 model_6_step_1000000 | Score: 8782, Total moves: 205207
 
-**The main reasons why I think it worked:**
+**The main reasons why I think it won:**
 - Compact state representation with snake length, distance and direction to apple and walls, plus ray casts in all 8 directions
 - Balanced starting states to expose agent to all stages of the game
 - Timeout penalty to prevent infinite loops
