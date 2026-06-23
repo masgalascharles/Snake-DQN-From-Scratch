@@ -19,19 +19,24 @@ Open your terminal or command prompt and clone this project:
 git clone https://github.com/masgalascharles/Snake-DQN-From-Scratch.git
 ```
 
-### 2. Install Dependencies
+### 2. Navigate to the Directory
+```bash
+cd "Snake-DQN-From-Scratch"
+```
+
+### 3. Install Dependencies
 Make sure you have Python installed, then run this command to install the required libraries:
 ```bash
 pip install -r requirements.txt
 ```
 **Note for GPU Acceleration:** This project uses CuPy for GPU training. Ensure you have a CUDA-compatible graphics card and the correct CUDA toolkit installed on your system.
 
-### 3. Navigate to the Directory
+### 4. Navigate to the Directory
 ```bash
-cd "Snake-DQN-From-Scratch/Attempt #4"
+cd "Attempt #4"
 ```
 
-### 4. Run the Best Agent
+### 5. Run the Best Agent
 ```bash
 python test.py
 ```
