@@ -12,5 +12,5 @@
     "timeout": 160.0,
     "state_includes_snake_length": true,
     "starting_lengths_used": "33% 2-39, 41-99, 101-199",
-    "other_notes": "Fine tuned model 4. Added a -1 punishment for stalling."
+    "other_notes": "Fine tuned model 41. Added a -1 punishment for stalling."
 }
