@@ -140,7 +140,7 @@ Leaky ReLU activation
 <img width="2552" height="1407" alt="model_5_apples_eaten_per_episode_over_time_step_done" src="https://github.com/user-attachments/assets/a4e787a4-0819-4ae3-91a8-0be8ab36e770" />
 https://github.com/user-attachments/assets/f67da238-8783-405f-8c71-192273450e7c
 
-
+It's performing very well. It consistently hits 60+ apples, and has even learned some techniques to dodge it's own tail after getting long enough. Plus, with the timeout punishment in place, it no longer gets stuck in infinite loops. There are limitations of this model though, especially the late game. Because it doesn't know the location of its body as it grows, it can trap itself easily once long enough. To fix this, I am considering adding `number_of_possible_moves_after_moving_up/down/left/right_from_current_state` to the state.
 
 ## Attempt #3
 **Network:**\
