@@ -8,27 +8,6 @@ Includes:
 - GPU acceleration with CuPy
 - Epsilon-greedy exploration
 
-## How to Run
-
-### 1. Clone the Repository
-Open your terminal or command prompt and clone this project:
-```bash
-git clone [https://github.com/masgalascharles/Snake-DQN-From-Scratch.git](https://github.com/masgalascharles/Snake-DQN-From-Scratch.git)
-cd Snake-DQN-From-Scratch
-```
-
-### 2. Install Dependencies
-Make sure you have Python installed, then run this command to install the required libraries:
-```bash
-pip install -r requirements.txt
-```
-**Note for GPU Acceleration:** This project uses `CuPy` for GPU training. Ensure you have a CUDA-compatible graphics card and the correct CUDA toolkit installed on your system.
-
-### 3. Run the Best Agent
-```bash
-python test.py
-```
-
 <details>
   <summary><strong>Project Progression</strong></summary>
 
