@@ -8,6 +8,30 @@ Includes:
 - GPU acceleration with CuPy
 - Epsilon-greedy exploration
 
+## How to Run
+
+### 1. Clone the Repository
+Open your terminal or command prompt and clone this project:
+```bash
+git clone [https://github.com/masgalascharles/Snake-DQN-From-Scratch.git](https://github.com/masgalascharles/Snake-DQN-From-Scratch.git)
+cd Snake-DQN-From-Scratch
+```
+
+### 2. Install Dependencies
+Make sure you have Python installed, then run this command to install the required libraries:
+```bash
+pip install -r requirements.txt
+```
+**Note for GPU Acceleration:** This project uses `CuPy` for GPU training. Ensure you have a CUDA-compatible graphics card and the correct CUDA toolkit installed on your system.
+
+### 3. Run the Best Agent
+```bash
+python test.py
+```
+
+<details>
+  <summary><strong>Project Progression</strong></summary>
+
 ## Attempt #4
 This attempt includes many small changes between similar models. Here is a brief summary of all of them:
 - **Model 1** | Trained 500,000 steps. Training length is now in steps instead of episodes. This allows precise control of training length and is just cleaner overall. Batch size is now 128 to speed up training time. Rewards are +0.9 for apples, -1 for death, and -0.001 for each step. Maximum move limit has been removed, because I realized it was limiting the agent from exploring later game states. State representation improved so that the agent can easily see the geometric relationships between objects. The state representation is:
@@ -281,3 +305,4 @@ Training:
 - 0.1 minimum epsilon
 
 For the first attempt, I wanted to see what would happen without a target network or experience replay. This resulted in the network being severely unstable, with the loss exploding to infinity. I also suspected this could be because of my rewards and state representation, in addition to having no target network or experience replay. But even after I fixed the exploding loss by experimenting with the rewards a bit, the loss appeared to never drop and it remained high throughout training. This proved the reward system wasn't the only issue.
+</details>
