@@ -1,0 +1,17 @@
+Task #1: starting state is always the default
+
+saved_runs/model_5/model_5 | Score: 30088, Total moves: 585650
+model_6 | Score: 28979, Total moves: 546447
+model_6_step_4000000 | Score: 28903, Total moves: 547920
+model_6_step_3000000 | Score: 28862, Total moves: 551829
+model_6_step_2000000 | Score: 28206, Total moves: 549548
+model_6_step_1000000 | Score: 27671, Total moves: 540099
+
+Task #2: starting state is picked randomly
+
+saved_runs/model_5/model_5 | Score: 9624, Total moves: 224234
+model_6 | Score: 9009, Total moves: 212459
+model_6_step_4000000 | Score: 8763, Total moves: 201101
+model_6_step_3000000 | Score: 9222, Total moves: 211368
+model_6_step_2000000 | Score: 9601, Total moves: 222840
+model_6_step_1000000 | Score: 8782, Total moves: 205207

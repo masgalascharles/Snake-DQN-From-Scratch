@@ -1,0 +1,17 @@
+Task #1: starting state is always the default
+
+model_1/model_1 | Score: 14448, Total moves: 378759
+model_2/model_2 | Score: 23244, Total moves: 472553
+model_3/model_3 | Score: 25382, Total moves: 559883
+model_4/model_4 | Score: 4679, Total moves: 181163
+model_4/model_41 | Score: 22979, Total moves: 472478
+model_5/model_5 | Score: 30136, Total moves: 585137
+
+Task #2: starting state is picked randomly
+
+model_1/model_1 | Score: 5750, Total moves: 177364
+model_2/model_2 | Score: 7260, Total moves: 185876
+model_3/model_3 | Score: 8391, Total moves: 224164
+model_4/model_4 | Score: 5257, Total moves: 182906
+model_4/model_41 | Score: 8989, Total moves: 222336
+model_5/model_5 | Score: 9951, Total moves: 229215
