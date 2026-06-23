@@ -8,6 +8,29 @@ Includes:
 - GPU acceleration with CuPy
 - Epsilon-greedy exploration
 
+## Attempt #4
+This attempt includes many small changes between similar models. Here is a brief summary of all of them:
+- **Model 1** | Trained 500,000 steps. Training length is now in steps instead of episodes. This allows precise control of training length and is just cleaner overall. Batch size is now 128 to speed up training time. Rewards are +0.9 for apples, -1 for death, and -0.001 for each step. Maximum move limit has been removed, because I realized it was limiting the agent from exploring later game states. State representation improved so that the agent can easily see the geometric relationships between objects. The state representation is:
+  ```python
+  state = [
+    x_distance_to_apple,
+    y_distance_to_apple,
+    y_distance_to_upper_wall,
+    y_distance_to_lower_wall,
+    x_distance_to_left_wall,
+    x_distance_to_right_wall,
+    first_object_type,
+    object_x_distance,
+    object_y_distance,
+    ...objects gotten and added to the state 8 times, gotten by a ray cast in each direction from the snake's head. Object types are -1 for any danger (wall, snake body) and 1 for an apple.
+  }
+  ```
+- **Model 2** | Exact same setup as model 1, but trained for 1,000,000 steps instead of 500,000. Also increased memory length from 100,000 to 300,000. This produced significantly better results. Lacked late game skills.
+- **Model 3** | Continued training of model 2, but only bigger snakes were used as the starting length. This was an attempt to improve late game performance. Trained for 600,000 steps.
+- **Model 4** | Added snake length to the beginning of the state representation. I also started preventing the snake tail from starting outside of the game area by using a modified Hamiltonian path. I generate a zig-zag like path through the game area, but exclude the first column to make sure the snake has area to escape and can't get trapped from the start. Trained for 600,000 steps.
+- **Model 41** | Changed the way starting lengths are randomly selected. Now, there is a 1/3 chance to get an early game snake, middle game snake, or late game snake. I started training with model 4, and trained for another 1,000,000 steps.
+- **Model 5** | Continued training of model 41, but I added a stalling penalty of -1 if the agent doesn't eat an apple for `environment.size ** 2 // 2.75` steps. Trained for 1,000,000 steps.
+
 ## Attempt #3
 **Network:**\
 (892, 512) → (512, 256) → (256, 64) → (64, 4)\
