@@ -28,7 +28,7 @@ pip install -r requirements.txt
 
 ### 3. Navigate to the Directory
 ```bash
-cd Snake-DQN-From-Scratch/Attempt #4
+cd "Snake-DQN-From-Scratch/Attempt #4"
 ```
 
 ### 4. Run the Best Agent
