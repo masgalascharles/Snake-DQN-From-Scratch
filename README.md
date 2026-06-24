@@ -16,27 +16,27 @@ A death penalty is enforced if the agent goes `environment.size ** 2 // 2.75` st
 
 <ins>Task #1: starting state is always the default</ins>
 
-model_1/model_1 | Score: 14448, Total moves: 378759\
-model_2/model_2 | Score: 23244, Total moves: 472553\
-model_3/model_3 | Score: 25382, Total moves: 559883\
-model_4/model_4 | Score: 4679, Total moves: 181163\
-model_4/model_41 | Score: 22979, Total moves: 472478\
-**model_5/model_5 | Score: 30136, Total moves: 585137 <--- WINNER!!!**
+model_1 | Score: 14448, Total moves: 378759\
+model_2 | Score: 23244, Total moves: 472553\
+model_3 | Score: 25382, Total moves: 559883\
+model_4 | Score: 4679, Total moves: 181163\
+model_41 | Score: 22979, Total moves: 472478\
+**model_5 | Score: 30136, Total moves: 585137 <--- WINNER!!!**
 
 <ins>Task #2: starting state is picked randomly</ins>
 
-model_1/model_1 | Score: 5750, Total moves: 177364\
-model_2/model_2 | Score: 7260, Total moves: 185876\
-model_3/model_3 | Score: 8391, Total moves: 224164\
-model_4/model_4 | Score: 5257, Total moves: 182906\
-model_4/model_41 | Score: 8989, Total moves: 222336\
-**model_5/model_5 | Score: 9951, Total moves: 229215 <--- WINNER!!!**
+model_1 | Score: 5750, Total moves: 177364\
+model_2 | Score: 7260, Total moves: 185876\
+model_3 | Score: 8391, Total moves: 224164\
+model_4 | Score: 5257, Total moves: 182906\
+model_41 | Score: 8989, Total moves: 222336\
+**model_5 | Score: 9951, Total moves: 229215 <--- WINNER!!!**
 
 -------------------------------------------------------------------------------------------------------------------
 
 <ins>Task #1: starting state is always the default</ins>
 
-**saved_runs/model_5/model_5 | Score: 30088, Total moves: 585650 <--- WINNER!!!**\
+**model_5 | Score: 30088, Total moves: 585650 <--- WINNER!!!**\
 model_6 | Score: 28979, Total moves: 546447\
 model_6_step_4000000 | Score: 28903, Total moves: 547920\
 model_6_step_3000000 | Score: 28862, Total moves: 551829\
@@ -45,7 +45,7 @@ model_6_step_1000000 | Score: 27671, Total moves: 540099
 
 <ins>Task #2: starting state is picked randomly</ins>
 
-**saved_runs/model_5/model_5 | Score: 9624, Total moves: 224234 <--- WINNER!!!**\
+**model_5 | Score: 9624, Total moves: 224234 <--- WINNER!!!**\
 model_6 | Score: 9009, Total moves: 212459\
 model_6_step_4000000 | Score: 8763, Total moves: 201101\
 model_6_step_3000000 | Score: 9222, Total moves: 211368\
@@ -120,28 +120,28 @@ Each model is given 500 episodes of play time, with a death penalty enforced if 
 
 <ins>Task #1: starting state is always the default</ins>
 
-model_1/model_1 | Score: 14448, Total moves: 378759\
-model_2/model_2 | Score: 23244, Total moves: 472553\
-model_3/model_3 | Score: 25382, Total moves: 559883\
-model_4/model_4 | Score: 4679, Total moves: 181163\
-model_4/model_41 | Score: 22979, Total moves: 472478\
-**model_5/model_5 | Score: 30136, Total moves: 585137 <--- WINNER!!!**
+model_1 | Score: 14448, Total moves: 378759\
+model_2 | Score: 23244, Total moves: 472553\
+model_3 | Score: 25382, Total moves: 559883\
+model_4 | Score: 4679, Total moves: 181163\
+model_41 | Score: 22979, Total moves: 472478\
+**model_5 | Score: 30136, Total moves: 585137 <--- WINNER!!!**
 
 <ins>Task #2: starting state is picked randomly</ins>
 
-model_1/model_1 | Score: 5750, Total moves: 177364\
-model_2/model_2 | Score: 7260, Total moves: 185876\
-model_3/model_3 | Score: 8391, Total moves: 224164\
-model_4/model_4 | Score: 5257, Total moves: 182906\
-model_4/model_41 | Score: 8989, Total moves: 222336\
-**model_5/model_5 | Score: 9951, Total moves: 229215 <--- WINNER!!!**
+model_1 | Score: 5750, Total moves: 177364\
+model_2 | Score: 7260, Total moves: 185876\
+model_3 | Score: 8391, Total moves: 224164\
+model_4 | Score: 5257, Total moves: 182906\
+model_41 | Score: 8989, Total moves: 222336\
+**model_5 | Score: 9951, Total moves: 229215 <--- WINNER!!!**
 
 **Evaluation (model 5 vs model 6 only):**\
 Each model is given 500 episodes of play time, with a death penalty enforced if the agent goes `environment.size ** 2 // 2.75` steps without eating an apple.
 
 <ins>Task #1: starting state is always the default</ins>
 
-**saved_runs/model_5/model_5 | Score: 30088, Total moves: 585650 <--- WINNER!!!**\
+**model_5 | Score: 30088, Total moves: 585650 <--- WINNER!!!**\
 model_6 | Score: 28979, Total moves: 546447\
 model_6_step_4000000 | Score: 28903, Total moves: 547920\
 model_6_step_3000000 | Score: 28862, Total moves: 551829\
@@ -150,14 +150,14 @@ model_6_step_1000000 | Score: 27671, Total moves: 540099
 
 <ins>Task #2: starting state is picked randomly</ins>
 
-**saved_runs/model_5/model_5 | Score: 9624, Total moves: 224234 <--- WINNER!!!**\
+**model_5 | Score: 9624, Total moves: 224234 <--- WINNER!!!**\
 model_6 | Score: 9009, Total moves: 212459\
 model_6_step_4000000 | Score: 8763, Total moves: 201101\
 model_6_step_3000000 | Score: 9222, Total moves: 211368\
 model_6_step_2000000 | Score: 9601, Total moves: 222840 **<--- CLOSE SECOND!!!**\
 model_6_step_1000000 | Score: 8782, Total moves: 205207
 
-### A Closer Look At Model 5
+### A Closer Look at the Best Model - Model 5
 **Network:**\
 (1 snake length + 2 apple distance + 4 walls distance + 8 * 3 ray casts = 31, 512) → (512, 256) → (256, 64) → (64, 4)\
 Leaky ReLU activation
