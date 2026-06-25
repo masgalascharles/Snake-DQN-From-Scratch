@@ -8,7 +8,7 @@ Includes:
 - GPU acceleration with CuPy
 - Epsilon-greedy exploration
 
-## CURRENT BEST MODEL: MODEL 5
+## CURRENT BEST MODEL: ATTEMPT 4/MODEL 5
 https://github.com/user-attachments/assets/173c3592-1f22-4f2d-929d-96f7b3f1c172
 
 **Performance comparison over 500 episodes:**
