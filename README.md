@@ -46,6 +46,7 @@ model_6_step_1000000 | Score: 8782, Total moves: 205207
 - Compact state representation with snake length, distance and direction to apple and walls, plus ray casts in all 8 directions
 - Balanced starting states to expose agent to all stages of the game
 - Timeout penalty to prevent infinite loops
+- Not trained to the point of overfitting
 
 ## How to Run
 
