@@ -11,7 +11,7 @@ Includes:
 ## CURRENT BEST MODEL: ATTEMPT 4/MODEL 5
 https://github.com/user-attachments/assets/173c3592-1f22-4f2d-929d-96f7b3f1c172
 
-**Performance comparison over 500 episodes:**
+**Performance comparison over 500 episodes:**\
 A death penalty is enforced if the agent goes `environment.size ** 2 // 2.75` steps without eating an apple.
 
 <ins>Task #1: starting state is always the default</ins>
