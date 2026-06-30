@@ -82,6 +82,95 @@ python test.py
 <details>
   <summary><strong>Project Progression</strong></summary>
 
+## Attempt #5 (update in progress lol)
+This attempt also includes many small changes between similar models. Here is a brief summary of all of them:
+- **Model 7** | 
+- **Model 8** | 
+- **Model 9** | 
+- **Model 10** | 
+- **Model 11** | 
+
+**Evaluation:**\
+Each model is given 500 episodes of play time, with a death penalty enforced if the agent goes `min(environment.size ** 2 + environment.size, environment.size ** 2 * 0.2 + len(environment.snake) * 1.25)` steps without eating an apple.
+
+<ins>Task #1: starting state is always the default</ins>
+
+
+<ins>Task #2: starting state is picked randomly</ins>
+
+
+### A Closer Look at the Best Model - Model 10
+**Network:**\
+(1 snake length + 2 apple distance + 4 walls distance + 8 * 3 ray casts + 4 available space + 4 can reach tail = 38, 512) → (512, 256) → (256, 64) → (64, 4)\
+Leaky ReLU activation
+
+**Significant changes:**
+- State representation
+- Reward system: the punishment for going too long without eating an apple is now `min(environment.size ** 2 + environment.size, environment.size ** 2 * 0.2 + len(environment.snake) * 1.25)`.
+- Starting lengths: now there's a 1/3 chance of a random length from 2 to 39, from 41 to 99, or from 101 to 199.
+- Starting position: the Hamiltonian path implemented in the previous attempt has been corrected. In my previous code, I wrote `while len(self.hamiltonian_path) < self.size ** 2`, when it should've been `while len(self.hamiltonian_path) < self.size ** 2 - self.size` to exclude the first column.
+
+**State representation:**
+- The new states look like this:
+  ```python
+  state = [
+    # Distinguish between early game and late game
+    snake_length,
+
+    # x and y coordinates are used for distances instead of using plain distances so the agent can actually tell what moves it needs to make in what directions and how much of each vs only knowing the unsigned distance
+
+    # Give the directions to the apple
+    x_distance_to_apple,
+    y_distance_to_apple,
+
+    # Make sure it always knows where the walls are
+    y_distance_to_upper_wall,
+    y_distance_to_lower_wall,
+    x_distance_to_left_wall,
+    x_distance_to_right_wall,
+
+    # Intended for it to learn how crowded areas are, whether there's a straight path to the apple, etc.
+    nearest_object_type,
+    x_distance_to_nearest_object,
+    y_distance_to_nearest_object,
+    # ...
+    # continued for objects in all 8 directions from the snake's head
+
+    # How much space is available after taking each move, so it doesn't get trapped
+    space_if_up,
+    space_if_down,
+    space_if_left,
+    space_if_right,
+
+    # If it can reach its tail after a move, then it likely won't be fully trapped
+    can_reach_tail_if_up,
+    can_reach_tail_if_down,
+    can_reach_tail_if_left,
+    can_reach_tail_if_right
+  ]
+  ```
+  I hypothesized these added features would give the agent what it needs to survive deeper into the game.
+
+**Rewards:**
+- -1 for death
+- -1 for going `min(environment.size ** 2 + environment.size, environment.size ** 2 * 0.2 + len(environment.snake) * 1.25)` steps without eating an apple. This change was meant to not punish long snakes the same way short snakes are punished. A long snake could take up to about `environment.size ** 2` moves to reach the apple.
+- +0.9 for apples.
+- -0.001 for each step
+
+**Training time:**\
+
+**Hyperparameters:**
+- 0.001 learning rate
+- 0.99 gamma
+- 200,000 memory length
+- 128 batch size
+- 10,000 target network update interval
+- 0.2 initial epsilon
+- 0 minimum epsilon
+
+**RESULTS:**
+
+
 ## Attempt #4
 This attempt includes many small changes between similar models. Here is a brief summary of all of them:
 - **Model 1** | Trained 500,000 steps. Training length is now in steps instead of episodes. This allows precise control of training length and is just cleaner overall. Batch size is now 128 to speed up training time. Rewards are +0.9 for apples, -1 for death, and -0.001 for each step. Maximum move limit has been removed, because I realized it was limiting the agent from exploring later game states. State representation improved so that the agent can easily see the geometric relationships between objects. The state representation is:
