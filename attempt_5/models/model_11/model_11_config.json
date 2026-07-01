@@ -1,0 +1,16 @@
+{
+    "model_name": "model_11",
+    "steps": 2000000,
+    "epsilon_start": 0.005,
+    "min_epsilon": 0.0005,
+    "epsilon_decay_rate": 2.2500000000000003e-09,
+    "target_network_update_interval": 10000,
+    "learning_rate": 0.0003,
+    "gamma": 0.99,
+    "memory_length": 350000,
+    "batch_size": 128,
+    "input_size": 39,
+    "timeout": "min(environment.size ** 2 + environment.size, environment.size ** 2 * 0.2 + len(environment.snake) * 1.25)",
+    "starting_lengths_used": "33% 2-75, 33% 76-150, 33% 151-300",
+    "other_notes": "Just an experiment to see what happens if I train model 10 for even longer."
+}
