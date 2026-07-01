@@ -61,7 +61,6 @@ python test.py
 <details>
   <summary><strong>Project Progression</strong></summary>
 
-
 <details>
   <summary><strong>Attempt #5</strong></summary>
 
@@ -160,7 +159,9 @@ https://github.com/user-attachments/assets/4bc69ab9-4e74-4b35-b535-05f91fe7034d
 This is by far the best model yet. The new information about available space, if it can reach its tail, the fixed Hamiltonian path, and extra training at very low epsilon and learning rate seems to have helped it get extremely good at eating apples and surviving with the information it is given. The average score is about 160, with it being capable of reaching 200 in good games. Overall, I am satisified with the results of this project, and this is where I am going to leave it for now.
 </details>
 
-## Attempt #4
+<details>
+  <summary><strong>Attempt #4</strong></summary>
+
 This attempt includes many small changes between similar models. Here is a brief summary of all of them:
 - **Model 1** | Trained 500,000 steps. Training length is now in steps instead of episodes. This allows precise control of training length and is just cleaner overall. Batch size is now 128 to speed up training time. Rewards are +0.9 for apples, -1 for death, and -0.001 for each step. Maximum move limit has been removed, because I realized it was limiting the agent from exploring later game states. State representation improved so that the agent can easily see the geometric relationships between objects. The state representation is:
   ```python
@@ -282,8 +283,11 @@ Leaky ReLU activation
 https://github.com/user-attachments/assets/f67da238-8783-405f-8c71-192273450e7c
 
 Model 5 is performing very well. It consistently hits 60+ apples, and has even learned some techniques to dodge it's own tail after getting long enough. Plus, with the timeout punishment in place, it no longer gets stuck in infinite loops. There are limitations of this model though, especially the late game. Because it doesn't know the location of its body as it grows, it can trap itself easily once long enough. To fix this, I am considering adding `number_of_possible_moves_after_moving_up/down/left/right_from_current_state` to the state.
+</details>
 
-## Attempt #3
+<details>
+  <summary><strong>Attempt #3</strong></summary>
+
 **Network:**\
 (892, 512) → (512, 256) → (256, 64) → (64, 4)\
 Leaky ReLU activation
@@ -344,8 +348,11 @@ I lowered the total number of episodes, because based on the graphs of the previ
 https://github.com/user-attachments/assets/52707c94-4108-4a8f-b885-5705b23490be
 
 While the graphs made it look like this run had potential, during evaluation, the agent might eat a few apples but then it goes in an infinite loop. I think this is caused by my new reward system of giving a reward for getting closer to the apple. It seems like it learned that going in circles and getting that small reward is better than risking going after the apples and dying. One improvement though, is that unlike the last attempt, this agent doesn't try to kill itself and actually learned to stay alive very well.
+</details>
 
-## Attempt #2
+<details>
+  <summary><strong>Attempt #2</strong></summary>
+
 I discovered I could use CuPy to speed up the training process. CuPy is a very simple transition from NumPy, except it allows operations on the GPU for significantly faster results.
 
 **Significant changes:**
@@ -399,8 +406,11 @@ I had the idea to let the agent explore random states at first, and then choose 
 https://github.com/user-attachments/assets/badadc8a-e37a-45f5-a502-cac1be74d1be
 
 The agent seemed to have learned that all moves are bad, which I suspect is because of the constant negative reward with no immediate positive, except when it might've randomly stumbled upon an apple during training. I'm unsure as to why during the end of training the agent was able to consistently survive for so long, but during testing it was killing itself quickly. I also think my state representation is a limiting factor. Even with my new row vector, it is likely hard for my agent to learn spatial relationships. My plan is to feed the network a state representation with more given information (like distance from the snake head to the apple) and modify my reward system to include rewards for moving towards the apple.
+</details>
 
-## Attempt #1
+<details>
+  <summary><strong>Attempt #1</strong></summary>
+
 Network:
 (462, 256) → (256, 128) → (128, 64) → (64, 4)
 Leaky ReLU activation
@@ -422,4 +432,5 @@ Training:
 - 0.1 minimum epsilon
 
 For the first attempt, I wanted to see what would happen without a target network or experience replay. This resulted in the network being severely unstable, with the loss exploding to infinity. I also suspected this could be because of my rewards and state representation, in addition to having no target network or experience replay. But even after I fixed the exploding loss by experimenting with the rewards a bit, the loss appeared to never drop and it remained high throughout training. This proved the reward system wasn't the only issue.
+</details>
 </details>
