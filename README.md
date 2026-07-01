@@ -8,45 +8,22 @@ Includes:
 - GPU acceleration with CuPy
 - Epsilon-greedy exploration
 
-## CURRENT BEST MODEL: ATTEMPT 4/MODEL 5
-https://github.com/user-attachments/assets/173c3592-1f22-4f2d-929d-96f7b3f1c172
+## CURRENT BEST MODEL: ATTEMPT 5/MODEL 11, STEP 1,800,000
+https://github.com/user-attachments/assets/61dca1ab-051a-4c2c-821d-89db9613753d
 
 **Performance comparison over 500 episodes:**\
-A death penalty is enforced if the agent goes `environment.size ** 2 // 2.75` steps without eating an apple.
+A death penalty is enforced if the agent goes `min(environment.size ** 2 + environment.size, environment.size ** 2 * 0.2 + len(environment.snake) * 1.25)` steps without eating an apple.
 
 <ins>Task #1: starting state is always the default</ins>
-
-model_1 | Score: 14448, Total moves: 378759\
-model_2 | Score: 23244, Total moves: 472553\
-model_3 | Score: 25382, Total moves: 559883\
-model_4 | Score: 4679, Total moves: 181163\
-model_41 | Score: 22979, Total moves: 472478\
-**model_5 | Score: 30136, Total moves: 585137 <--- WINNER!!!**\
-model_6 | Score: 28979, Total moves: 546447\
-model_6_step_4000000 | Score: 28903, Total moves: 547920\
-model_6_step_3000000 | Score: 28862, Total moves: 551829\
-model_6_step_2000000 | Score: 28206, Total moves: 549548\
-model_6_step_1000000 | Score: 27671, Total moves: 540099
+<img width="428" height="528" alt="image" src="https://github.com/user-attachments/assets/d6c8461a-593f-4d36-a315-b1081fe45ed7" />
 
 <ins>Task #2: starting state is picked randomly</ins>
-
-model_1 | Score: 5750, Total moves: 177364\
-model_2 | Score: 7260, Total moves: 185876\
-model_3 | Score: 8391, Total moves: 224164\
-model_4 | Score: 5257, Total moves: 182906\
-model_41 | Score: 8989, Total moves: 222336\
-**model_5 | Score: 9951, Total moves: 229215 <--- WINNER!!!**\
-model_6 | Score: 9009, Total moves: 212459\
-model_6_step_4000000 | Score: 8763, Total moves: 201101\
-model_6_step_3000000 | Score: 9222, Total moves: 211368\
-model_6_step_2000000 | Score: 9601, Total moves: 222840 **<--- CLOSE SECOND!!!**\
-model_6_step_1000000 | Score: 8782, Total moves: 205207
+<img width="428" height="595" alt="image" src="https://github.com/user-attachments/assets/c6310792-e935-43e3-b7f0-4104caf2f2cd" />
 
 **The main reasons why I think it won:**
-- Compact state representation with snake length, distance and direction to apple and walls, plus ray casts in all 8 directions
-- Balanced starting states to expose agent to all stages of the game
-- Timeout penalty to prevent infinite loops
-- Not trained to the point of overfitting
+- Better timeout that is relative to the snake's length
+- More information about the available space so it doesn't get trapped as easily
+- Longer training
 
 ## How to Run
 
@@ -70,7 +47,7 @@ pip install -r requirements.txt
 
 ### 4. Navigate to the Directory
 ```bash
-cd "attempt_4"
+cd "attempt_5"
 ```
 
 ### 5. Run the Best Agent
@@ -82,24 +59,24 @@ python test.py
 <details>
   <summary><strong>Project Progression</strong></summary>
 
-## Attempt #5 (update in progress lol)
+## Attempt #5
 This attempt also includes many small changes between similar models. Here is a brief summary of all of them:
-- **Model 7** | 
-- **Model 8** | 
-- **Model 9** | 
-- **Model 10** | 
-- **Model 11** | 
+- **Model 7** | I added available space after taking every possible move to the state to stop the agent from trapping itself.
+- **Model 8** | I added if the snake can reach its tail after every possible to the state. This was so it could always leave an escape path.
+- **Model 9** | I fixed a bug in the training of model 8 where the simulated move to calculate if it could reach its tail was happening in a different order than in the move function itself.
+- **Model 10** | I loaded model_9_step_1600000 and trained it for another 2,000,000 steps.
+- **Model 11** | I loaded model_10 and trained for another 2,000,000 steps.
 
 **Evaluation:**\
 Each model is given 500 episodes of play time, with a death penalty enforced if the agent goes `min(environment.size ** 2 + environment.size, environment.size ** 2 * 0.2 + len(environment.snake) * 1.25)` steps without eating an apple.
 
 <ins>Task #1: starting state is always the default</ins>
-
+<img width="428" height="528" alt="image" src="https://github.com/user-attachments/assets/d6c8461a-593f-4d36-a315-b1081fe45ed7" />
 
 <ins>Task #2: starting state is picked randomly</ins>
+<img width="428" height="595" alt="image" src="https://github.com/user-attachments/assets/c6310792-e935-43e3-b7f0-4104caf2f2cd" />
 
-
-### A Closer Look at the Best Model - Model 10
+### A Closer Look at the Best Model - Model 11, Step 1,800,000
 **Network:**\
 (1 snake length + 2 apple distance + 4 walls distance + 8 * 3 ray casts + 4 available space + 4 can reach tail = 38, 512) → (512, 256) → (256, 64) → (64, 4)\
 Leaky ReLU activation
@@ -158,18 +135,24 @@ Leaky ReLU activation
 - -0.001 for each step
 
 **Training time:**\
+- 2,000,000 episodes, with epsilon decaying over all of them
 
 **Hyperparameters:**
-- 0.001 learning rate
+- 0.0003 learning rate
 - 0.99 gamma
-- 200,000 memory length
+- 350,000 memory length
 - 128 batch size
 - 10,000 target network update interval
-- 0.2 initial epsilon
-- 0 minimum epsilon
+- 0.005 initial epsilon
+- 0.0005 minimum epsilon
 
 **RESULTS:**
+<img width="2565" height="1407" alt="model_11_loss_over_time_step_done" src="https://github.com/user-attachments/assets/f18571fa-e56b-4abb-9cf5-b1c9098ff0b4" />
+<img width="2605" height="1407" alt="model_11_moves_survived_per_episode_over_time_step_done" src="https://github.com/user-attachments/assets/9671a5a5-1d7d-48c2-9b1d-8817816f6569" />
+<img width="2552" height="1407" alt="model_11_apples_eaten_per_episode_over_time_step_done" src="https://github.com/user-attachments/assets/17602149-6f5d-4853-ae28-e59481777b87" />
+https://github.com/user-attachments/assets/4bc69ab9-4e74-4b35-b535-05f91fe7034d
 
+This is by far the best model yet. The new information about available space, if it can reach its tail, the fixed Hamiltonian path, and extra training at very low epsilon and learning rate seems to have helped it get extremely good at eating apples and surviving with the information it is given. The average score is about 160, with it being capable of reaching 200 in good games. Overall, I am satisified with the results of this project, and this is where I am going to leave it for now.
 
 ## Attempt #4
 This attempt includes many small changes between similar models. Here is a brief summary of all of them:
