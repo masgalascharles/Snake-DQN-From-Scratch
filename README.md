@@ -61,7 +61,10 @@ python test.py
 <details>
   <summary><strong>Project Progression</strong></summary>
 
-## Attempt #5
+
+<details>
+  <summary><strong>Attempt #5</strong></summary>
+
 This attempt includes many small changes between similar models. Here is a brief summary of all of them:
 - **Model 7** | I added available space after taking every possible move to the state to stop the agent from trapping itself and corrected the random snake initialization.
 - **Model 8** | I added if the snake can reach its tail after every possible to the state. This was so it could always leave an escape path.
@@ -155,6 +158,7 @@ Leaky ReLU activation
 https://github.com/user-attachments/assets/4bc69ab9-4e74-4b35-b535-05f91fe7034d
 
 This is by far the best model yet. The new information about available space, if it can reach its tail, the fixed Hamiltonian path, and extra training at very low epsilon and learning rate seems to have helped it get extremely good at eating apples and surviving with the information it is given. The average score is about 160, with it being capable of reaching 200 in good games. Overall, I am satisified with the results of this project, and this is where I am going to leave it for now.
+</details>
 
 ## Attempt #4
 This attempt includes many small changes between similar models. Here is a brief summary of all of them:
