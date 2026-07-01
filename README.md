@@ -62,8 +62,8 @@ python test.py
   <summary><strong>Project Progression</strong></summary>
 
 ## Attempt #5
-This attempt also includes many small changes between similar models. Here is a brief summary of all of them:
-- **Model 7** | I added available space after taking every possible move to the state to stop the agent from trapping itself.
+This attempt includes many small changes between similar models. Here is a brief summary of all of them:
+- **Model 7** | I added available space after taking every possible move to the state to stop the agent from trapping itself and corrected the random snake initialization.
 - **Model 8** | I added if the snake can reach its tail after every possible to the state. This was so it could always leave an escape path.
 - **Model 9** | I fixed a bug in the training of model 8 where the simulated move to calculate if it could reach its tail was happening in a different order than in the move function itself.
 - **Model 10** | I loaded model_9_step_1600000 and trained it for another 2,000,000 steps.
