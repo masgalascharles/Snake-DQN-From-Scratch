@@ -137,7 +137,7 @@ Leaky ReLU activation
 - -0.001 for each step
 
 **Training time:**\
-- 2,000,000 episodes, with epsilon decaying over all of them
+- 2,000,000 steps, with epsilon decaying over all of them
 
 **Hyperparameters:**
 - 0.0003 learning rate
