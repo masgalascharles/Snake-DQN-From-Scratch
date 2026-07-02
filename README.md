@@ -15,9 +15,11 @@ https://github.com/user-attachments/assets/61dca1ab-051a-4c2c-821d-89db9613753d
 A death penalty is enforced if the agent goes `min(environment.size ** 2 + environment.size, environment.size ** 2 * 0.2 + len(environment.snake) * 1.25)` steps without eating an apple.
 
 <ins>Task #1: starting state is always the default</ins>
+
 <img width="428" height="528" alt="image" src="https://github.com/user-attachments/assets/d6c8461a-593f-4d36-a315-b1081fe45ed7" />
 
 <ins>Task #2: starting state is picked randomly</ins>
+
 <img width="428" height="560" alt="image" src="https://github.com/user-attachments/assets/20158c10-544e-40c4-a16e-a4203d843aaa" />
 
 **The main reasons why I think it won:**
