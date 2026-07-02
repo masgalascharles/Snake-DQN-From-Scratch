@@ -31,29 +31,29 @@ A death penalty is enforced if the agent goes `min(environment.size ** 2 + envir
 
 ### 1. Clone the Repository
 Open your terminal or command prompt and clone this project:
-```bash
+```cmd
 git clone https://github.com/masgalascharles/Snake-DQN-From-Scratch.git
 ```
 
 ### 2. Navigate to the Directory
-```bash
+```cmd
 cd "Snake-DQN-From-Scratch"
 ```
 
 ### 3. Install Dependencies
 Make sure you have Python installed, then run this command to install the required libraries:
-```bash
+```cmd
 pip install -r requirements.txt
 ```
 **Note for GPU Acceleration:** This project uses CuPy for GPU training. Ensure you have a CUDA-compatible graphics card and the correct CUDA toolkit installed on your system.
 
 ### 4. Navigate to the Directory
-```bash
+```cmd
 cd "attempt_5"
 ```
 
 ### 5. Run the Best Agent
-```bash
+```cmd
 python test.py
 ```
 
