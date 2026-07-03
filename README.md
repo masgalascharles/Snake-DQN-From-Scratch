@@ -218,7 +218,7 @@ model_6_step_3000000 | Score: 9222, Total moves: 211368\
 model_6_step_2000000 | Score: 9601, Total moves: 222840 **<--- CLOSE SECOND!!!**\
 model_6_step_1000000 | Score: 8782, Total moves: 205207
 
-### A Closer Look at the Best Model - Model 5
+### A Closer Look at Model 5
 **Network:**\
 (1 snake length + 2 apple distance + 4 walls distance + 8 * 3 ray casts = 31, 512) → (512, 256) → (256, 64) → (64, 4)\
 Leaky ReLU activation
