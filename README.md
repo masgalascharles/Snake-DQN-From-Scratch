@@ -8,19 +8,19 @@ Includes:
 - GPU acceleration with CuPy
 - Epsilon-greedy exploration
 
-## CURRENT BEST MODEL: ATTEMPT 5/MODEL 11, STEP 1,800,000
-https://github.com/user-attachments/assets/61dca1ab-051a-4c2c-821d-89db9613753d
+## CURRENT BEST MODEL: ATTEMPT 5/MODEL 12, STEP 2,200,000
+[VIDEO COMING SOON]
 
 **Performance comparison over 500 episodes:**\
 A death penalty is enforced if the agent goes `min(environment.size ** 2 + environment.size, environment.size ** 2 * 0.2 + len(environment.snake) * 1.25)` steps without eating an apple.
 
 <ins>Task #1: starting state is always the default</ins>
 
-<img width="428" height="528" alt="image" src="https://github.com/user-attachments/assets/d6c8461a-593f-4d36-a315-b1081fe45ed7" />
+<img width="1550" height="1330" alt="image" src="https://github.com/user-attachments/assets/50464b43-a5e4-4f83-a99f-8dbbf55ecf66" />
 
 <ins>Task #2: starting state is picked randomly</ins>
 
-<img width="428" height="560" alt="image" src="https://github.com/user-attachments/assets/20158c10-544e-40c4-a16e-a4203d843aaa" />
+<img width="1549" height="1398" alt="image" src="https://github.com/user-attachments/assets/51e7bf78-1893-4b3f-be9b-d2bf4272b0d3" />
 
 **The main reasons why I think it won:**
 - Better timeout that is relative to the snake's length
@@ -66,10 +66,6 @@ python test.py
 
 
 
-
-
-
-
 # READ A DETAILED PROGRESSION OF THIS PROJECT:
 <details>
   <summary><strong>Project Progression</strong></summary>
@@ -81,21 +77,22 @@ This attempt includes many small changes between similar models. Here is a brief
 - **Model 7** | I added available space after taking every possible move to the state to stop the agent from trapping itself and corrected the random snake initialization.
 - **Model 8** | I added if the snake can reach its tail after every possible to the state. This was so it could always leave an escape path.
 - **Model 9** | I fixed a bug in the training of model 8 where the simulated move to calculate if it could reach its tail was happening in a different order than in the move function itself.
-- **Model 10** | I loaded model_9_step_1600000 and trained it for another 2,000,000 steps.
+- **Model 10** | I loaded model_9_step_1600000 and trained for another 2,000,000 steps.
 - **Model 11** | I loaded model_10 and trained for another 2,000,000 steps.
+- **Model 12** | I loaded model_11 and trained for another 3,000,000 steps.
 
 **Evaluation:**\
 Each model is given 500 episodes of play time, with a death penalty enforced if the agent goes `min(environment.size ** 2 + environment.size, environment.size ** 2 * 0.2 + len(environment.snake) * 1.25)` steps without eating an apple.
 
 <ins>Task #1: starting state is always the default</ins>
 
-<img width="428" height="528" alt="image" src="https://github.com/user-attachments/assets/d6c8461a-593f-4d36-a315-b1081fe45ed7" />
+<img width="1550" height="1330" alt="image" src="https://github.com/user-attachments/assets/50464b43-a5e4-4f83-a99f-8dbbf55ecf66" />
 
 <ins>Task #2: starting state is picked randomly</ins>
 
-<img width="428" height="560" alt="image" src="https://github.com/user-attachments/assets/3e034833-d225-4f5c-b535-f7a8bc88b927" />
+<img width="1549" height="1398" alt="image" src="https://github.com/user-attachments/assets/51e7bf78-1893-4b3f-be9b-d2bf4272b0d3" />
 
-### A Closer Look at the Best Model - Model 11, Step 1,800,000
+### A Closer Look at the Best Model - Model 12, Step 2,200,000
 **Network:**\
 (1 snake length + 2 apple distance + 4 walls distance + 8 * 3 ray casts + 4 available space + 4 can reach tail = 38, 512) → (512, 256) → (256, 64) → (64, 4)\
 Leaky ReLU activation
@@ -154,24 +151,25 @@ Leaky ReLU activation
 - -0.001 for each step
 
 **Training time:**\
-- 2,000,000 steps, with epsilon decaying over all of them
+- 3,000,000 steps, with epsilon decaying over all of them
 
 **Hyperparameters:**
-- 0.0003 learning rate
+- 0.0004 learning rate
 - 0.99 gamma
-- 350,000 memory length
-- 128 batch size
+- 300,000 memory length
+- 256 batch size
 - 10,000 target network update interval
-- 0.005 initial epsilon
+- 0.002 initial epsilon
 - 0.0005 minimum epsilon
 
 **RESULTS:**
-<img width="2565" height="1407" alt="model_11_loss_over_time_step_done" src="https://github.com/user-attachments/assets/f18571fa-e56b-4abb-9cf5-b1c9098ff0b4" />
-<img width="2605" height="1407" alt="model_11_moves_survived_per_episode_over_time_step_done" src="https://github.com/user-attachments/assets/9671a5a5-1d7d-48c2-9b1d-8817816f6569" />
-<img width="2552" height="1407" alt="model_11_apples_eaten_per_episode_over_time_step_done" src="https://github.com/user-attachments/assets/17602149-6f5d-4853-ae28-e59481777b87" />
+<img width="2565" height="1407" alt="model_12_loss_over_time_step_done" src="https://github.com/user-attachments/assets/e5418c00-6a71-4820-a3dd-9cb1eb2b7be5" />
+<img width="2605" height="1407" alt="model_12_moves_survived_per_episode_over_time_step_done" src="https://github.com/user-attachments/assets/f04c91e9-740a-4438-b045-2c910fa8fcc7" />
+<img width="2552" height="1407" alt="model_12_apples_eaten_per_episode_over_time_step_done" src="https://github.com/user-attachments/assets/e5c7fc67-eb60-4059-a616-7a60dfc2c0e1" />
+
 https://github.com/user-attachments/assets/4bc69ab9-4e74-4b35-b535-05f91fe7034d
 
-This is by far the best model yet. The new information about available space, if it can reach its tail, the fixed Hamiltonian path, and extra training at very low epsilon and learning rate seems to have helped it get extremely good at eating apples and surviving with the information it is given. The average score is about 160, with it being capable of reaching 200 in good games. Overall, I am satisified with the results of this project, and this is where I am going to leave it for now.
+This is by far the best model yet. The new information about available space, if it can reach its tail, the fixed Hamiltonian path, and extra training at very low epsilon and learning rate seems to have helped it get extremely good at eating apples and surviving with the information it is given. The average score is about 165, with it being capable of reaching 200 in good games. Overall, I am satisfied with the results of this project, and this is where I am going to leave it for now.
 </details>
 
 <details>
