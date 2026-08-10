@@ -12,7 +12,7 @@ learning_rate = 0.001
 gamma = 0.99
 agent = Agent(input_size, learning_rate, gamma)
 
-agent.load("models/model_11/model_11_step_1800000")
+agent.load("models/model_12/model_12_step_2200000")
 environment.reset()
 pygame.init()
 

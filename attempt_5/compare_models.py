@@ -69,14 +69,9 @@ def compare_models(model_paths, number_of_episodes):
 
 
 if __name__ == "__main__":
-    model_paths = [
-        "model_11_step_300000",
-        "model_11_step_600000",
-        "model_11_step_900000",
-        "model_11_step_1200000",
-        "model_11_step_1500000",
-        "model_11_step_1800000",
-        "model_11"
-    ]
+    model_paths = []
+
+    for i in range(1, 16):
+        model_paths.append(f"model_12_step_{i * 200000}")
 
     compare_models(model_paths, 500)

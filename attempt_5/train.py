@@ -14,25 +14,25 @@ rng = np.random.default_rng()
 
 environment = Environment()
 
-steps = 2000000
-epsilon = 0.005
+steps = 3000000
+epsilon = 0.002
 min_epsilon = 0.0005
-epsilon_decay_rate = (epsilon - min_epsilon) / 2000000
+epsilon_decay_rate = (epsilon - min_epsilon) / 3000000
 target_network_update_interval = 10000
 print_interval = 5000
-save_graph_interval = 300000
-save_model_interval = 300000
+save_graph_interval = 200000
+save_model_interval = 200000
 eval_length = 20
 moves_survived_per_episode = []
 apples_eaten_per_episode = []
 losses = []
 
-model_name = "model_11"
+model_name = "model_12"
 input_size = environment.get_state().shape[0]
-learning_rate = 0.0003
+learning_rate = 0.0004
 gamma = 0.99
-memory = deque(maxlen=350000)
-batch_size = 128
+memory = deque(maxlen=300000)
+batch_size = 256
 agent = Agent(input_size, learning_rate, gamma)
 
 config = {
@@ -92,7 +92,7 @@ steps_without_apple = 0
 moves_survived = 0
 apples_eaten = 0
 
-agent.load("models/model_10/model_10")
+agent.load("models/model_11/model_11_step_1800000")
 environment.reset(for_training=True)
 
 for step in range(1, steps + 1):
