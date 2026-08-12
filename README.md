@@ -9,7 +9,8 @@ Includes:
 - Epsilon-greedy exploration
 
 ## CURRENT BEST MODEL: ATTEMPT 5/MODEL 12, STEP 2,200,000
-**[VIDEO COMING SOON]**
+
+https://github.com/user-attachments/assets/a5a30c89-e02a-4fed-9a65-4be5b9b6ca06
 
 **Performance comparison over 500 episodes:**\
 A death penalty is enforced if the agent goes `min(environment.size ** 2 + environment.size, environment.size ** 2 * 0.2 + len(environment.snake) * 1.25)` steps without eating an apple.
@@ -167,7 +168,7 @@ Leaky ReLU activation
 <img width="2605" height="1407" alt="model_12_moves_survived_per_episode_over_time_step_done" src="https://github.com/user-attachments/assets/f04c91e9-740a-4438-b045-2c910fa8fcc7" />
 <img width="2552" height="1407" alt="model_12_apples_eaten_per_episode_over_time_step_done" src="https://github.com/user-attachments/assets/e5c7fc67-eb60-4059-a616-7a60dfc2c0e1" />
 
-**[VIDEO COMING SOON]**
+https://github.com/user-attachments/assets/a5a30c89-e02a-4fed-9a65-4be5b9b6ca06
 
 This is by far the best model yet. The new information about available space, if it can reach its tail, the fixed Hamiltonian path, and extra training at very low epsilon and learning rate seems to have helped it get extremely good at eating apples and surviving with the information it is given. The average score is about 165, with it being capable of reaching 200 in good games. Overall, I am satisfied with the results of this project, and this is where I am going to leave it for now.
 </details>
